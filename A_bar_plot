@@ -1,0 +1,29 @@
+from matplotlib import pyplot as plt
+# This tiny script plots a barplot in 4 categories with 2 dataset within each category
+
+plt.figure()
+# The data values are divided up in 2 sets in order to only specify the bar-positions and x-categories once
+# The data can easily be done as one set too
+set1 = [2.4, 0.22, -0.32, 0.02]  #y values, set 1
+set2 = [2.22, 2.01, 3.03, -0.44]  #y values, set 2
+index = ["Category 1", "Category 2", "Category 3", "Category 4"]  # x-categories/labels
+colors = ["purple", "mediumvioletred", "grey", "darkgrey", "purple", "mediumvioletred", "grey", "darkgrey"]  # Colors for the bars, the first four is for set 1
+edcolors = ["white", "white", "white", "white", "white", "white", "white", "white"]  # Colors for the edge and pattern of each bar. Set "green" for green stripes
+patterns = ["/////", "/////", "/////", "/////", "", "", "", ""]  # Patterns for the bars. "/" gives few stripes and "///" gives more stripes. Some other possibilities are ".", "....", "\", "x"
+wd = 0.1  # Width of the bars
+position = [0.05, 0.55, 0.3, 0.8]  # Position of the index/x-categories and used for the positions of the bars
+for i in range(len(index)):  # Looping over the 4 datavalues in "index"
+    plt.bar(position[i] - wd/2, set1[i], color=colors[i], edgecolor=edcolors[i], linestyle="", width=wd, hatch=patterns[i])#, label="Set 1 " + chr(945) + " " + index[i])  # Plotting of the set 1 values "position[i]-wd/2" places the bars just before the index/x-categories. Uncomment first part to get ALL the set 1 bars in the legend
+    plt.bar(position[i] + wd/2, set2[i], color=colors[4+i], edgecolor=edcolors[4+i], linestyle="", width=wd, hatch=patterns[4+i])#, label="Set 1 " + chr(946) + " " + index[i]) # Plotting of the set 2 values "position[i]+wd/2" places the bars just after the index/x-categories
+
+plt.bar(0.7, 1, color="black", edgecolor="white", linestyle="", width=0, hatch="/////", label="Set 1 " + chr(945))  # This plot has width=0 as to not show a bar but allow a descripton of set 1 in the legend
+plt.bar(0.7, 1, color="black", edgecolor="black", linestyle="", width=0, hatch="", label="Set 1 " + chr(946))  # This plot gives no bar but contributes to showing set 2 in the legend
+plt.xticks(position, index)  # Places the index/x-categories
+
+#plt.title("A really nice barplot")
+plt.ylabel("$\mathregular{eV^{3}}")
+#plt.xlabel("Calculation")
+plt.legend(frameon=False)#, loc="center left")  # Removes the box around the ledgend. Uncomment first part to decide the placement of the legend.
+plt.tight_layout()
+# plt.savefig("C:\\--myfilepath--\\my_figure_name.png")  # Saves the file as a png, don't forget to set the correct filepath
+plt.show()  # Showing the plot on the screen
